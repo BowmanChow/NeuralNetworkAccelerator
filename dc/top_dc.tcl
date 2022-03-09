@@ -2,7 +2,15 @@ check_library
 
 set WORKING_DESIGN sigmoid_alippi
 set REPORT_OUT reports/$WORKING_DESIGN
-read_file {../TwosComplement.sv ../sigmoid_alippi.sv} -autoread -format sverilog -top $WORKING_DESIGN
+set SV_DIR ".."
+set MODULES {TwosComplement sigmoid_alippi}
+set SV_FILES {}
+foreach m $MODULES {;
+    puts " $m"
+    lappend SV_FILES "$SV_DIR/$m.sv"
+}
+puts $SV_FILES
+read_file $SV_FILES -autoread -format sverilog -top $WORKING_DESIGN
 
 elaborate $WORKING_DESIGN
 current_design $WORKING_DESIGN
