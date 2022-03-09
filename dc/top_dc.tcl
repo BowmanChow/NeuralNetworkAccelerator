@@ -1,9 +1,9 @@
 check_library
 
 set WORKING_DESIGN sigmoid_PLAN
-set REPORT_OUT reports/$WORKING_DESIGN
 set SV_DIR ".."
-set MODULES {TwosComplement sigmoid_alippi}
+set MODULES {TwosComplement}
+lappend MODULES "$WORKING_DESIGN"
 set SV_FILES {}
 foreach m $MODULES {;
     puts " $m"
@@ -23,6 +23,8 @@ write -hierarchy -f ddc -out $UNMAPPED_DIR/$WORKING_DESIGN.ddc
 source ./contraints.con
 
 compile_ultra
+
+set REPORT_OUT reports/$WORKING_DESIGN
 # report_constraint -all
 exec ./create_dir.sh $REPORT_OUT
 report_timing > $REPORT_OUT/timing.rpt
