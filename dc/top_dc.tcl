@@ -1,6 +1,6 @@
 check_library
 
-set WORKING_DESIGN sigmoid_alippi
+set WORKING_DESIGN sigmoid_PLAN
 set REPORT_OUT reports/$WORKING_DESIGN
 set SV_DIR ".."
 set MODULES {TwosComplement sigmoid_alippi}
