@@ -1,4 +1,0 @@
-set search_path ". /software/synopsys/syn/libraries/syn /software/synopsys/syn/minpower/syn /software/synopsys/syn/dw/syn_ver /software/synopsys/syn/dw/sim_ver /library/smic18_artisan_fb/aci/sc-x/synopsys"
-set target_library "/library/smic18_artisan_fb/aci/sc-x/synopsys/typical.db"
-set link_library "/library/smic18_artisan_fb/aci/sc-x/synopsys/typical.db"
-set symbol_library "/library/smic18_artisan_fb/aci/sc-x/symbols/synopsys/smic18.sdb"
