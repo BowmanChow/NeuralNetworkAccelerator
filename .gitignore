@@ -13,3 +13,4 @@
 !test
 !src
 !*.sh
+!README.md
