@@ -12,3 +12,4 @@
 !ptpx
 !test
 !src
+!*.sh
