@@ -12,6 +12,9 @@ SV_FILES := $(foreach m, $(MODULES), ${SV_DIR}/${m}.sv)
 VCS_FLAGS := +v2k -debug_all -R +incdir+${SV_DIR} +incdir+${TEST_DIR}
 NAME_FILE := ../name.tcl
 
+all: dc icc post ptpx
+	@echo 'make all'
+
 rtl:
 	@echo ${SV_FILES};
 	@echo '`define MODULE ${MODULES}' > ${FLAG_FILE}
@@ -34,8 +37,5 @@ icc: name
 
 ptpx: name
 	cd ../ptpx; pt_shell -f ptpx.tcl | tee run.log
-
-all: dc icc post ptpx
-	@echo 'make all'
 
 .PHONY: all dc icc post ptpx name rtl

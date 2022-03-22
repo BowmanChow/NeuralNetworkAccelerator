@@ -1,0 +1,5 @@
+# Ignore
+flags.sv
+
+# But not these files...
+!.gitignore

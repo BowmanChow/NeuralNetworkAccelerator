@@ -8,4 +8,7 @@
 !Makefile
 !vcs
 !dc
+!icc
+!ptpx
+!test
 !src
