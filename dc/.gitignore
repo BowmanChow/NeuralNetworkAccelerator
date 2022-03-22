@@ -4,6 +4,5 @@
 # But not these files...
 !.gitignore
 !*.tcl
-!*.sh
 !.synopsys_dc.setup
 !constraints.con

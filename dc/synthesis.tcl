@@ -1,7 +1,7 @@
 
 set access_internal_pins "true"
 
-set search_path "/software/synopsys/syn/libraries/syn ./lib ./src"
+set search_path "/software/synopsys/syn/libraries/syn ../lib ../src"
 set target_library "scc40nll_vhsc40_rvt_tt_v1p1_25c_basic.db"
 set symbol_library "scc40nll_vhsc40_rvt.sdb"
 set link_library "* scc40nll_vhsc40_rvt_tt_v1p1_25c_basic.db"
@@ -31,22 +31,21 @@ check_library
 
 
 #--------------------set design name--------------
-set topModuleName sigmoid_PLAN
-
+source ../name.tcl
 #-------------------design read in----------------
 set SV_DIR "../src"
-set MODULES {TwosComplement}
-lappend MODULES "$topModuleName"
+set MODULES {}
+lappend MODULES "$DESIGN"
 set SV_FILES {}
 foreach m $MODULES {;
     puts " $m"
     lappend SV_FILES "$SV_DIR/$m.sv"
 }
 puts $SV_FILES
-read_file $SV_FILES -autoread -format sverilog -top $topModuleName
+read_file $SV_FILES -autoread -format sverilog -top $DESIGN
 
 
-elaborate $topModuleName
+elaborate $DESIGN
 
 #-----------------------Naming rules----------------------------
 
@@ -116,17 +115,17 @@ set verilogout_show_unconnected_pins true
 #-------------------------no tri or tran---------------------------
 
 #----------------------------netlist&sdf&sdc---------------------
-set NETLIST_OUT_OUT netlist/$topModuleName
-exec ./create_dir.sh $NETLIST_OUT_OUT
-write -f verilog -hier -output $NETLIST_OUT_OUT/$topModuleName.v
-#write -hierarchy -format sdf -output $NETLIST_OUT_OUT/$topModuleName.sdf
-#write -hierarchy -format sdc -output $NETLIST_OUT_OUT/$topModuleName.sdc
-write_sdc $NETLIST_OUT_OUT/$topModuleName.sdc
-write_sdf $NETLIST_OUT_OUT/$topModuleName.sdf
+set NETLIST_OUT ../netlist/$DESIGN
+exec ../create_dir.sh $NETLIST_OUT
+write -f verilog -hier -output $NETLIST_OUT/$DESIGN.v
+#write -hierarchy -format sdf -output $NETLIST_OUT/$DESIGN.sdf
+#write -hierarchy -format sdc -output $NETLIST_OUT/$DESIGN.sdc
+write_sdc $NETLIST_OUT/$DESIGN.sdc
+write_sdf $NETLIST_OUT/$DESIGN.sdf
 
 #--------------------------------report--------------------------
-set REPORT_OUT reports/$topModuleName
-exec ./create_dir.sh $REPORT_OUT
+set REPORT_OUT reports/$DESIGN
+exec ../create_dir.sh $REPORT_OUT
 report_clock > $REPORT_OUT/clock.rpt
 report_port -verbose > $REPORT_OUT/port.rpt
 report_design -verbose > $REPORT_OUT/design.rpt
@@ -134,6 +133,6 @@ report_area  > $REPORT_OUT/area.rpt
 report_timing > $REPORT_OUT/timing.rpt
 report_constraint -all > $REPORT_OUT/constrain.rpt
 report_power > $REPORT_OUT/power.rpt
-report_power
-report_timing
-write -format ddc -hierarchy -output $topModuleName.ddc
+write -format ddc -hierarchy -output $DESIGN.ddc
+
+exit
