@@ -1,0 +1,5 @@
+# Ignore
+
+# But not these files...
+!.gitignore
+!Booth

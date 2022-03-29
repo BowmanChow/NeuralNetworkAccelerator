@@ -62,7 +62,7 @@ elaborate $DESIGN
 #set_clock_uncertainty -setup 0.2 [get_clocks clk]
 #set_clock_uncertainty -hold 0.18 [get_clocks clk]
 
-create_clock -period 1.0 -name Vclk
+create_clock -period 2.0 -name Vclk
 set_clock_uncertainty -setup 0.0 [get_clocks Vclk]
 set_input_delay -clock Vclk -max 0.0 [all_inputs]
 set_output_delay -clock Vclk -max 0.0 [all_outputs]

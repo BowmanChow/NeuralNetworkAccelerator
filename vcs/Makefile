@@ -5,9 +5,9 @@ TEST_FILE := ${TEST_DIR}/test_single_port.sv
 FLAG_FILE := ${TEST_DIR}/flags.sv
 SV_DIR := ../src
 ICC_OUTPUT_DIR := ../icc/outputs
-MODULES := sigmoid_PLAN
+MODULES := BoothMultiplier
 ICC_OUTPUT_FILE := $(foreach m, $(MODULES), ${ICC_OUTPUT_DIR}/${m}/${m}.output.v)
-ICC_OUTPUT_FILE += ./scc40nll_vhsc40_rvt.v
+ICC_LIB_FILE := ../lib/scc40nll_vhsc40_rvt.v
 SV_FILES := $(foreach m, $(MODULES), ${SV_DIR}/${m}.sv)
 VCS_FLAGS := +v2k -debug_all -R +incdir+${SV_DIR} +incdir+${TEST_DIR}
 NAME_FILE := ../name.tcl
@@ -18,13 +18,13 @@ all: dc icc post ptpx
 rtl:
 	@echo ${SV_FILES};
 	@echo '`define MODULE ${MODULES}' > ${FLAG_FILE}
-	$(CC) ${SV_FLAG} ${TEST_FILE} ${SV_FILES} ${VCS_FLAGS}
+	$(CC) ${SV_FLAG} ${TEST_FILE} ${SV_FILES} ${ICC_LIB_FILE} ${VCS_FLAGS}
 
 post:
 	@echo ${ICC_OUTPUT_FILE};
 	@echo '`define MODULE ${MODULES}' > ${FLAG_FILE}
 	@echo '`define IS_POST' >> ${FLAG_FILE}
-	$(CC) ${SV_FLAG} ${TEST_FILE} ${ICC_OUTPUT_FILE} ${VCS_FLAGS}
+	$(CC) ${SV_FLAG} ${TEST_FILE} ${ICC_OUTPUT_FILE} ${ICC_LIB_FILE} ${VCS_FLAGS}
 
 name: ${NAME_FILE}
 	@echo 'set DESIGN ${MODULES}' > ${NAME_FILE}
