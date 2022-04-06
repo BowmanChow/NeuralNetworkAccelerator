@@ -13,4 +13,5 @@
 !test
 !src
 !*.sh
+!*.py
 !README.md

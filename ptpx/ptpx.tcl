@@ -38,4 +38,4 @@ set REPORT_DIR ./reports
 exec ../create_dir.sh $REPORT_DIR
 report_power > $REPORT_DIR/$DESIGN.rpt
 
-exit
+# exit
